@@ -11,20 +11,22 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/member")
 public class MemberController {
-    @Autowired
-    MemberService service;
+    private MemberService service;
+
+    public MemberController(MemberService memberService) {
+        this.service = memberService;
+    }
 
     @PostMapping("signup")
     public ResponseEntity signUp(@RequestBody Member member) throws Exception{
         service.signUp(member);
-        DefaultResponse<String> response = new DefaultResponse();
-        response.setMsg("CREATED");
-        response.setStatus(201);
+        DefaultResponse<Object> response = new DefaultResponse("CREATED", 201, null);
         return new ResponseEntity(response, HttpStatus.CREATED);
     }
     @PostMapping("/login")
     public ResponseEntity login(Member member) throws Exception{
         service.login(member);
-        return new ResponseEntity<DefaultResponse>(HttpStatus.OK);
+        DefaultResponse<Object> response = new DefaultResponse("OK", 200, null);
+        return new ResponseEntity<DefaultResponse>(response,HttpStatus.OK);
     }
 }

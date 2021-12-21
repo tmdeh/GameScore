@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface MemberMapper {
-    @Insert("INSERT INTO member(member_id, password, nickname) VALUES(#{member.id},#{member.password}, #{member.nickname})")
-    int insertMember(@Param("member") Member member);
+    @Insert("INSERT INTO member(member_id, password, nickname, salt) " +
+            "VALUES(#{member.id},#{member.password}, #{member.nickname}, #{salt})")
+    int insertMember(@Param("member") Member member, @Param("salt") String salt);
 }

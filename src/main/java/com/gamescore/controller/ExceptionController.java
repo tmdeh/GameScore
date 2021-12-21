@@ -13,27 +13,22 @@ public class ExceptionController {
     @ExceptionHandler({HttpRequestMethodNotSupportedException.class})
     public ResponseEntity handelMethodNotSupport (HttpRequestMethodNotSupportedException ex) {
         System.out.printf(ex.getMessage());
-        DefaultResponse<String> response = new DefaultResponse<>();
-        response.setMsg("메소드가 잘못 되었습니다.(GET, POST, PUT)");
-        response.setStatus(404);
+        DefaultResponse<String> response = new DefaultResponse<>("메소드가 잘못 되었습니다.(GET, POST, PUT)",
+                404, null);
         return new ResponseEntity<DefaultResponse>(response, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler({DuplicateKeyException.class})
     public ResponseEntity handleDuplicatedId(DuplicateKeyException ex) {
         System.out.printf(ex.getMessage());
-        DefaultResponse<String> response = new DefaultResponse<>();
-        response.setStatus(400);
-        response.setMsg("아이디가 중복 됐습니다.");
+        DefaultResponse<String> response = new DefaultResponse<>("아이디가 중복 됐습니다.", 400, null);
         return new ResponseEntity<DefaultResponse>(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler({Exception.class})
     public ResponseEntity handleAll(Exception ex) {
         ex.printStackTrace();
-        DefaultResponse<String> response = new DefaultResponse();
-        response.setStatus(500);
-        response.setMsg("Server Error!!");
+        DefaultResponse<String> response = new DefaultResponse("Server Errorr!!", 500, null);
         return new ResponseEntity<DefaultResponse>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
