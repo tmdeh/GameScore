@@ -4,9 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+@AllArgsConstructor
 @Getter
 @Setter
-@AllArgsConstructor
-public class TokenVO {
-    private String token;
+public class TokenAndNicknameVO {
+    private String Token;
+    private String nickname;
 }
