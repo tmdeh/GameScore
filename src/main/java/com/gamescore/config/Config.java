@@ -6,6 +6,8 @@ import com.gamescore.service.member.MemberService;
 import com.gamescore.service.member.MemberServiceImpl;
 import com.gamescore.service.member.jwt.Token;
 import com.gamescore.service.member.jwt.TokenImpl;
+import com.gamescore.service.score.ScoreService;
+import com.gamescore.service.score.ScoreServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,4 +29,9 @@ public class Config {
     public MemberService memberService() {
         return new MemberServiceImpl(passwordEncoder(), token());
     }
+
+//    @Bean
+//    public ScoreService scoreService() {
+//        return new ScoreServiceImpl();
+//    }
 }
